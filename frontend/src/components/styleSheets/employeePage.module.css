@@ -1,0 +1,65 @@
+.employeePage {
+    padding: 20px 40px;
+}
+
+.employeeImage {
+    height: 200px;
+    width: 200px;
+    object-fit: fill;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #b3b3b3;
+}
+
+.tableDiv {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    padding: 20px 40px;
+    border: 1px solid grey;
+    background-color: #ececec;
+}
+
+.employeeTableRow td {
+    border-top: 1px solid #5f5f5f;
+    border-bottom: 1px solid #5f5f5f;
+    padding: 10px;
+    background-color: #ffffff;
+}
+
+.employeeTableRow td:first-child {
+    border-left: 1px solid #5f5f5f;
+    border-radius: 10px 0 0 10px;
+    background-color: #ffffff;
+}
+
+.employeeTableRow td:last-child {
+    border-right: 1px solid #5f5f5f;
+    border-radius: 0 10px 10px 0;
+    background-color: #ffffff;
+}
+
+.employeeTableCell {
+    text-align: center;
+    width: calc(100% / 5);
+    font-size: 17px;
+    line-height: 1.5;
+    font-weight: 500;
+}
+
+.lastCell {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.employeeTableCellHead{
+    font-weight: bold;
+    font-size: 24px;
+}
+.employeeHeading1{
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
