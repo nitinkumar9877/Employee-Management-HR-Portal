@@ -58,8 +58,55 @@
     font-weight: bold;
     font-size: 24px;
 }
+.headingSeachParent{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .employeeHeading1{
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
+
+}
+.inputBox{
+    border:1px solid grey;
+    border-radius: 15px;
+    overflow: hidden;
+    width: 350px;
+
+}
+.inputBox:focus{
+    outline:grey;
+}
+.inputBox{
+    padding: 10px 25px;
+}
+
+.employeeTableSortButton{
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    padding: 8px 30px;
+    border: 1px solid white;
+    border-radius:25px;
+    overflow: hidden;
+}
+.positionClass{
+    position: relative;
+}
+.designationListDropDown{
+    position: absolute;
+    /* z-index: 12; */
+    border: 1px solid black;
+    left: 0;
+    top: auto;
+    right: 0;
+    background-color: #fff;
+    
+}
+
+.listItem{
+    padding: 5px 0;
+    cursor: pointer;
 }

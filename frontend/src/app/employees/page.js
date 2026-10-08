@@ -1,14 +1,23 @@
+"use client"
 import EmployeeList from "@/components/services/EmployeeList";
 import styles from "../../components/styleSheets/employeePage.module.css"
-import { Suspense } from 'react';
+import { useState } from "react";
 
 export default function EmployeesPage() {
+  const [searchData, setsearchData] = useState("");
+  const searchInputData = (event)=>{
+    const data =  event.target.value
+    console.log("user type for search : ", data);
+    setsearchData(data);
+
+  }
   return (
     <section className={styles.employeePage}>
-      <h1 className={styles.employeeHeading1}>Employees</h1>
-      <Suspense fallback={<p>Loading employees...</p>}>
-        <EmployeeList />
-      </Suspense>
+      <div className={styles.headingSeachParent}>
+        <h1 className={styles.employeeHeading1}>All Employee List</h1>
+        <input className={styles.inputBox} type="text" placeholder="Search by employee name" onChange={searchInputData} />
+      </div>
+      <EmployeeList searchByName= {searchData}/>
     </section>
   );
 }

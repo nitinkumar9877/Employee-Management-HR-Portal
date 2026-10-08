@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 require('dotenv').config();
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const EmployeeSchema = require("./models/employee.model");
 
+app.use(cors({ origin: "http://localhost:3000" }));
 
 mongoose.connect(process.env.MONGODBURL).then(()=>{
     console.log("connect with db");
@@ -42,20 +44,40 @@ app.post("/api/employees", async (req,res)=>{ // http://localhost:5000/api/emplo
     }
 })
 
+// app.get("/api/employees",async(req,res)=>{
+//     const employeesData = await EmployeeSchema.find();
+//     res.send({
+//         status:200,
+//         data: employeesData
+//     })
+// })
 
 app.get("/api/employees",async(req,res)=>{
-    const employeesData = await EmployeeSchema.find();
+    console.log("req.query :",req.query);
+    const {firstName, designation, department, status, page, pagination} = req.query;
+    const filter = {};
+    if(firstName) filter.firstName = firstName;
+    console.log("first name is :", firstName)
+    console.log("first name is :", filter.firstName)
+    if(designation) filter.designation = designation;
+    if(department) filter.department = department;
+    if(status) filter.status = status;
+    if(page) filter.status = page;
+    if(pagination) filter.status = pagination;
+    // const skip = (page - 1) * pagination;
+    const employeesData = await EmployeeSchema.find(filter);
     res.send({
         status:200,
         data: employeesData
     })
 })
-app.get("/api/employees/:id", async(req,res)=>{
-    const employeeId = req.params.id;
-    console.log("selected employeeId :",employeeId);
-    const selectedEmployeeData = await EmployeeSchema.findById(employeeId);
-    res.send(selectedEmployeeData);
-})
+
+// app.get("/api/employees/:id", async(req,res)=>{
+//     const employeeId = req.params.id;
+//     console.log("selected employeeId :",employeeId);
+//     const selectedEmployeeData = await EmployeeSchema.findById(employeeId);
+//     res.send(selectedEmployeeData);
+// })
 
 app.put("/api/employees/:id", async(req,res)=>{
     const employeeId = req.params.id;
