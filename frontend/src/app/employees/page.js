@@ -16,7 +16,7 @@ export default function EmployeesPage() {
     <section className={styles.employeePage}>
       <div className={styles.headingSeachParent}>
         <h1 className={styles.employeeHeading1}>All Employee List</h1>
-        <input className={styles.inputBox} type="text" placeholder="Search by employee name" onChange={searchInputData} />
+        <input className={styles.inputBox} type="text" placeholder="Search by employee first full name" onChange={searchInputData} />
       </div>
       <EmployeeList searchByName={searchData} />
     </section>

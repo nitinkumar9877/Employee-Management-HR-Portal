@@ -5,7 +5,7 @@
 .employeeImage {
     height: 200px;
     width: 200px;
-    object-fit: fill;
+    object-fit: cover;
     border-radius: 10px;
     overflow: hidden;
     border: 1px solid #b3b3b3;
@@ -162,4 +162,13 @@
 .crossIcon{
     height: 14px;
     width: 13px;
+}
+
+.nextPageUrl{
+    font-size:16px;
+    color: rgb(89, 89, 155);
+    text-decoration: underline;
+}
+.secondClass{
+    text-align: start;
 }

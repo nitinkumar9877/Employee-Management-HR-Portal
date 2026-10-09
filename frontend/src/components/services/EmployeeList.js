@@ -21,11 +21,15 @@ export default function EmployeeList({ searchByName }) {
   const [designationList, setdesignationList] = useState([]);
   const [departmentList, setdepartmentList] = useState([]);
   const [statusList, setstatusList] = useState([]);
-  const [desgination, setdesgination] = useState();
-  const [department, setdepartment] = useState();
-  const [status, setstatus] = useState();
+  const [desgination, setdesgination] = useState([]);
+  const [department, setdepartment] = useState([]);
+  const [status, setstatus] = useState([]);
   const router = useRouter();
   const [chipsList, setchipsList] = useState([]);
+  const [toggalDesignation, settoggalDesignation] = useState(false);
+  const [toggalDepartment, settoggalDepartment] = useState(false);
+  const [toggalstatus, settoggalstatus] = useState(false);
+
   useEffect(() => {
     const designationListCheck = async () => {
       try {
@@ -68,15 +72,11 @@ export default function EmployeeList({ searchByName }) {
       params.set('firstName', searchByName);
     }
     console.log("params value", params.firstName);
-    if (desgination) {
-      params.set("designation", desgination);
-    }
-    if (department) {
-      params.set("department", department);
-    }
-    if (status) {
-      params.set('status', status);
-    }
+
+    desgination.forEach(value => params.append("designation", value));
+    department.forEach(value => params.append("department", value));
+    status.forEach(value => params.append("status", value));
+
     const queryString = params.toString();
     console.log("params value query", queryString);
 
@@ -108,6 +108,21 @@ export default function EmployeeList({ searchByName }) {
 
   }, [searchByName, status, department, desgination])
 
+  const ChipsRemove = (id) => {
+    const removedChip = chipsList.find((item) => item.id === id);
+
+    if (!removedChip) return;
+
+    setchipsList((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
+    const removeItemDesignation = desgination.filter(item => item !== removedChip.value)
+    const removeItemDepartment = department.filter(item => item !== removedChip.value)
+    const removeItemStatus = status.filter(item => item !== removedChip.value)
+    setdesgination(removeItemDesignation);
+    setdepartment(removeItemDepartment);
+    setstatus(removeItemStatus);
+  }
 
   // useEffect(()=>{
 
@@ -175,32 +190,18 @@ export default function EmployeeList({ searchByName }) {
   // }
 
   const selectDesination = (desi) => {
-    const data = desi;
-    setdesgination(data);
+    setdesgination(previous => previous.includes(desi) ? previous.filter(item => item !== desi) : [...previous, desi]);
     console.log("selected desgination: ", desgination)
-    
   }
 
   const selectDepartment = (depart) => {
-    const data = depart;
-    setdepartment(data);
+    setdepartment(previous => previous.includes(depart) ? previous.filter(item => item !== depart) : [...previous, depart]);
     console.log("selected department: ", department);
   }
 
   const selectStatus = (stat) => {
-    const data = stat;
-    setstatus(data);
+    setstatus(previous => previous.includes(stat) ? previous.filter(item => item !== stat) : [...previous, stat]);
     console.log("selected status : ", status)
-  }
-
-
-  const [toggalDesignation, settoggalDesignation] = useState(false);
-  const [toggalDepartment, settoggalDepartment] = useState(false);
-  const [toggalstatus, settoggalstatus] = useState(false);
-
-  const ChipsRemove = (id)=>{
-    const data = chipsList.filter(item => item.id !== id);
-    setchipsList(data);
   }
 
   if (loading) {
@@ -280,7 +281,7 @@ export default function EmployeeList({ searchByName }) {
           <tr>
             <th>
               <div className={styles.chipsList}>
-                {(chipsList.length > 0) ? chipsList.map (item => (<span className={styles.itemChips} onClick={()=> ChipsRemove(item.id)} key={item.id}>{item.value} <RxCross2 className={styles.crossIcon} /></span>)):" "}
+                {(chipsList.length > 0) ? chipsList.map(item => (<span className={styles.itemChips} onClick={() => ChipsRemove(item.id)} key={item.id}>{item.value} <RxCross2 className={styles.crossIcon} /></span>)) : " "}
               </div>
             </th>
           </tr>
@@ -289,7 +290,7 @@ export default function EmployeeList({ searchByName }) {
           {employees.map((employee) => (
             <tr key={employee._id} className={styles.employeeTableRow}>
               <td className={styles.employeeTableCell}><Link href={`/employees/${employee._id}`}><img className={styles.employeeImage} src={employee.thumbnail} alt={employee.firstName} /></Link></td>
-              <td className={styles.employeeTableCell}>{employee.firstName} {employee.lastName}</td>
+              <td className={`${styles.employeeTableCell} ${styles.secondClass}`}><Link className={styles.nextPageUrl} href={`/employees/${employee._id}`}>{employee.firstName} {employee.lastName} </Link></td>
               <td className={styles.employeeTableCell}>{employee.designation}</td>
               <td className={styles.employeeTableCell}>{employee.department}</td>
               <td className={`${styles.lastCell} ${styles.employeeTableCell}`}>{employee.status} <Link href={`/employees/edit/${employee._id}`} className={styles.editBtn}>Edit</Link> </td>
@@ -299,4 +300,5 @@ export default function EmployeeList({ searchByName }) {
       </table>
     </>
   );
+
 }
