@@ -7,6 +7,11 @@ export const EmployeeFetchApi = async (apiUrl) => {
   return apiResponse.data;
 };
 
+export const EmployeeUpdateApi = async (apiUrl, employeeData) => {
+  const apiResponse = await axios.put(apiUrl, employeeData);
+  return apiResponse.data;
+};
+
 export const DesignationList = async () => {
   const response = await axios.get(`${API_URL}employees`);
 

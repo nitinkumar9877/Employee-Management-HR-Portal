@@ -110,3 +110,56 @@
     padding: 5px 0;
     cursor: pointer;
 }
+
+.editBtn{
+    background-color: #2563eb;
+    padding: 8px 20px;
+    border: 1px solid #2563eb;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-left: 15px;
+}
+
+.arrowIcon{
+    height: 15px;
+    width: 21px;
+}
+
+.DropdownIcon{
+    height: 17px;
+    width: auto;
+}
+.employeeTableCellHead{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.chipsList{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.itemChips{
+    padding: 5px 15px;
+}
+
+.itemChips {
+  display: inline-block;
+  padding: 6px 15px;
+  background-color: #e0e7ff;
+  border-radius: 20px;
+  cursor: pointer;
+  min-width: 20px ;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.crossIcon{
+    height: 14px;
+    width: 13px;
+}

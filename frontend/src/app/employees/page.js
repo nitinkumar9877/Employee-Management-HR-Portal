@@ -2,11 +2,12 @@
 import EmployeeList from "@/components/services/EmployeeList";
 import styles from "../../components/styleSheets/employeePage.module.css"
 import { useState } from "react";
+import { FaArrowsAltV } from "react-icons/fa";
 
 export default function EmployeesPage() {
   const [searchData, setsearchData] = useState("");
-  const searchInputData = (event)=>{
-    const data =  event.target.value
+  const searchInputData = (event) => {
+    const data = event.target.value
     console.log("user type for search : ", data);
     setsearchData(data);
 
@@ -17,7 +18,7 @@ export default function EmployeesPage() {
         <h1 className={styles.employeeHeading1}>All Employee List</h1>
         <input className={styles.inputBox} type="text" placeholder="Search by employee name" onChange={searchInputData} />
       </div>
-      <EmployeeList searchByName= {searchData}/>
+      <EmployeeList searchByName={searchData} />
     </section>
   );
 }
